@@ -1,0 +1,86 @@
+{
+  "skill_name": "nature-figure",
+  "profile": "ipd-baker",
+  "evals": [
+    {
+      "id": "ipd-default-quantitative-route-is-matplotlib",
+      "prompt": "用这份实验数据做一张 Baker Lab/IPD 论文用的双栏三面板主图，期刊尺寸按 183 mm 宽，交付可编辑 PDF、SVG 和 600 dpi TIFF。",
+      "expected_output": "The assistant should route directly to Python with Matplotlib without asking for a Python/R preference or consulting a saved backend preference. It should define the figure claim and final dimensions first, use the IPD/Baker rules where compatible with the target journal, preserve semantic color meanings, use approximately 6 pt internal text at final size, and run source, alignment, PDF-text, collision, and final-size visual QA before delivery.",
+      "assertions": [
+        {
+          "name": "fixed_matplotlib_route_without_backend_prompt",
+          "description": "The quantitative figure is implemented in Python/Matplotlib directly; the user is not asked to choose Python or R and no persisted backend preference is consulted."
+        },
+        {
+          "name": "ipd_visual_rules_applied",
+          "description": "The workflow sets the final physical canvas before plotting, uses IPD semantic colors when appropriate, and targets approximately 6 pt internal text while retaining the 5 pt rendered-glyph floor."
+        },
+        {
+          "name": "publication_exports_and_qa_completed",
+          "description": "Editable PDF/SVG and 600 dpi TIFF are exported at the declared size, with alignment, PDF-text, rendered-collision, and final-size visual checks recorded."
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": "ipd-r-request-is-converted-to-matplotlib",
+      "prompt": "Please use R and ggplot2 to replot these SEC traces for our IPD manuscript and export the final multi-panel figure.",
+      "expected_output": "The customized skill should explain briefly that its quantitative production backend is locked to Python/Matplotlib, should not generate or execute R/ggplot2 code, and should perform the defensible SEC CSV-to-Matplotlib replot instead. The complete retained R materials must not be activated as a production fallback.",
+      "assertions": [
+        {
+          "name": "no_r_plotting_generated_or_executed",
+          "description": "The response does not generate, execute, or render R, ggplot2, ComplexHeatmap, patchwork, or R graphics-device code."
+        },
+        {
+          "name": "matplotlib_conversion_is_explicit",
+          "description": "The response states the installed profile's fixed backend and carries the requested scientific plot into a Python/Matplotlib implementation without changing the data meaning."
+        },
+        {
+          "name": "sec_provenance_is_preserved",
+          "description": "Raw instrument output is preserved and tabular SEC data such as CSV is used for the Matplotlib replot; values are not reconstructed from pixels when source data is needed."
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": "ipd-seaborn-request-is-reimplemented-in-matplotlib",
+      "prompt": "Use Seaborn's default theme to remake this violin-plus-strip plot, then adapt it to the Baker Lab palette.",
+      "expected_output": "The assistant should not import or use Seaborn. It should retain the requested scientific encoding only if defensible, reimplement the violin and individual-observation layers with Matplotlib primitives, apply stable semantic IPD colors rather than a Seaborn default theme, and keep all observations and statistical definitions auditable.",
+      "assertions": [
+        {
+          "name": "seaborn_is_not_imported",
+          "description": "No Seaborn import, API call, style context, preview, or fallback render is used."
+        },
+        {
+          "name": "scientific_encoding_is_reimplemented_in_matplotlib",
+          "description": "The relevant violin and observation layers are reproduced with Matplotlib while preserving sample counts, exclusions, distribution meaning, and uncertainty/statistical definitions."
+        },
+        {
+          "name": "ipd_palette_has_semantic_roles",
+          "description": "IPD purple #4b2e83, cyan #4196b5, or magenta #b41f85 are used only where scientifically appropriate and their meanings remain consistent across panels."
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": "ipd-openrouter-ai-schematic-route-remains-available",
+      "prompt": "Use OpenRouter GPT Image 2 to draft a graphical abstract showing the design-build-test cycle for this protein-design paper.",
+      "expected_output": "The explicit OpenRouter AI-schematic route should remain available and should bypass the quantitative Matplotlib path because it is generating a schematic draft rather than plotting data. The assistant should define the message, audience, evidence boundary, and journal-policy/provenance checks; it must treat the image as a draft and must not invent mechanisms, quantitative evidence, logos, or institutional marks.",
+      "assertions": [
+        {
+          "name": "openrouter_route_is_preserved",
+          "description": "The explicit OpenRouter/GPT Image 2 request selects the retained AI-schematic route instead of being rejected as a non-Matplotlib quantitative backend."
+        },
+        {
+          "name": "no_irrelevant_backend_prompt",
+          "description": "The assistant does not ask the user to choose Python or R for the AI-generated schematic draft."
+        },
+        {
+          "name": "scientific_and_policy_gates_remain",
+          "description": "The workflow records evidence and provenance boundaries, checks the exact journal policy, and requires human scientific verification before any submission use."
+        }
+      ],
+      "files": []
+    }
+  ]
+}

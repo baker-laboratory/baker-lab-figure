@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nature Figure — IPD/Baker"
+  short_description: "Create IPD-ready figures with Python and Matplotlib"
+  default_prompt: "Use $nature-figure to create an IPD/Baker-ready Matplotlib figure from these data."
